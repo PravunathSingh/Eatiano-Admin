@@ -13,6 +13,13 @@ import Dashboard from './pages/Dashboard';
 import Error404 from './pages/Error404';
 import ForgotPassword from './pages/ForgotPassword';
 import CheckOTP from './pages/CheckOTP';
+import AllRestaurants from './components/restaurants/AllRestaurants';
+import AddRestaurant from './components/restaurants/addRestaurant/AddRestaurant';
+import EditRestaurant from './components/restaurants/editRestaurant/EditRestaurant';
+import AllProducts from './components/products/AllProducts';
+import AddProduct from './components/products/addProduct/AddProduct';
+import EditProduct from './components/products/editProduct/EditProduct';
+import SetNewPassword from './pages/SetNewPassword';
 
 const App = () => {
   const authCtx = useContext(Auth);
@@ -41,6 +48,13 @@ const App = () => {
           <Route path='*' element={<Error404 />} />
           <Route path='/forgotPassword' element={<ForgotPassword />} />
           <Route path='/checkOTP' element={<CheckOTP />} />
+          <Route path='/setNewPassword' element={<SetNewPassword />} />
+          <Route path='/restaurants' element={<AllRestaurants />} />
+          <Route path='/restaurantProducts/:id' element={<AllProducts />} />
+          <Route path='/restaurants/add' element={<AddRestaurant />} />
+          <Route path='/restaurantProducts/add/:id' element={<AddProduct />} />
+          <Route path='/editRestaurant/:id' element={<EditRestaurant />} />
+          <Route path='/editProduct/:id' element={<EditProduct />} />
         </Routes>
       </ScrollToTop>
     </Router>
