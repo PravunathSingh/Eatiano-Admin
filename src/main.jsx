@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import AuthProvider from './context/authContext';
 import RestaurantsProvider from './context/restaurantsContext';
+import AgentsProvider from './context/deliveryContext';
 
 ReactDOM.render(
   <AuthProvider>
     <RestaurantsProvider>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
+      <AgentsProvider>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </AgentsProvider>
     </RestaurantsProvider>
   </AuthProvider>,
   document.getElementById('root')
