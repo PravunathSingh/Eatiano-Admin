@@ -7,6 +7,7 @@ const CheckOTP = () => {
     email: '',
     otp: '',
   });
+  const [loading, setLoading] = useState(false);
   const history = useNavigate();
 
   const checkOTPChange = (e) => {
@@ -15,6 +16,7 @@ const CheckOTP = () => {
 
   const otpSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const res = await axios.post(
       'https://achievexsolutions.in/current_work/eatiano/api/auth/check_otp',
       {
@@ -23,12 +25,14 @@ const CheckOTP = () => {
       }
     );
 
+    setLoading(false);
     const resData = res.data;
     console.log(resData);
     setCheckOTP({
       email: '',
       otp: '',
     });
+    localStorage.setItem('passwordToken', resData.forget_password_token);
     history('/setNewPassword', { replace: true });
   };
 
@@ -68,12 +72,18 @@ const CheckOTP = () => {
               />
             </div>
 
-            <button
-              type='submit'
-              className='w-full px-8 py-2 my-6 text-lg font-medium text-gray-900 transition-all duration-300 rounded-lg hover:text bg-cta md:text-xl hover:bg-cta-dark hover:scale-110 focus:ring-2 ring-offset-2 ring-cta-dark'
-            >
-              Check OTP
-            </button>
+            {loading ? (
+              <p className='text-lg font-medium text-center text-gray-300 font-rubik md:text-xl'>
+                Verifying OTP...
+              </p>
+            ) : (
+              <button
+                type='submit'
+                className='w-full px-8 py-2 my-6 text-lg font-medium text-gray-900 transition-all duration-300 rounded-lg hover:text bg-cta md:text-xl hover:bg-cta-dark hover:scale-110 focus:ring-2 ring-offset-2 ring-cta-dark'
+              >
+                Check OTP
+              </button>
+            )}
           </form>
         </div>
       </div>

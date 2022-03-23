@@ -22,6 +22,8 @@ import EditProduct from './components/products/editProduct/EditProduct';
 import SetNewPassword from './pages/SetNewPassword';
 import AllDeliveryAgents from './components/delivery/AllDeliveryAgents';
 import AddDelivery from './components/delivery/addDelivery/AddDelivery';
+import AllExpenses from './components/expenses/AllExpenses';
+import AddExpense from './components/expenses/addExpense/AddExpense';
 
 const App = () => {
   const authCtx = useContext(Auth);
@@ -52,6 +54,8 @@ const App = () => {
           <Route path='/checkOTP' element={<CheckOTP />} />
           <Route path='/setNewPassword' element={<SetNewPassword />} />
           <Route path='/restaurants' element={<AllRestaurants />} />
+          <Route path='/expenses' element={<AllExpenses />} />
+          <Route path='/expenses/add' element={<AddExpense />} />
           <Route path='/deliveryAgents' element={<AllDeliveryAgents />} />
           <Route path='/restaurantProducts/:id' element={<AllProducts />} />
           <Route path='/restaurants/add' element={<AddRestaurant />} />

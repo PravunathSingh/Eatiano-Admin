@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 
 const SetNewPassword = () => {
   const [newPassword, setNewPassword] = useState({
-    email: '',
+    passwordToken: localStorage.getItem('passwordToken'),
     password: '',
+    email: '',
   });
   const history = useNavigate();
 
@@ -19,6 +20,7 @@ const SetNewPassword = () => {
       'https://achievexsolutions.in/current_work/eatiano/api/auth/change_password',
       {
         email: newPassword.email,
+        forget_password_token: newPassword.passwordToken,
         password: newPassword.password,
       }
     );
@@ -26,10 +28,12 @@ const SetNewPassword = () => {
     const resData = res.data;
     console.log(resData);
     setNewPassword({
-      email: '',
+      passwordToken: '',
       password: '',
+      email: '',
     });
-    history('/', { replace: true });
+    localStorage.removeItem('passwordToken');
+    history('/signin', { replace: true });
   };
 
   return (
@@ -49,6 +53,20 @@ const SetNewPassword = () => {
                 required
                 name='email'
                 value={newPassword.email}
+                onChange={newPasswordChange}
+                className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
+              />
+            </div>
+
+            <div className='mb-6 md:mb-9'>
+              <h6 className='mb-3 text-lg font-medium text-gray-200 lg:text-xl md:mb-5'>
+                <label>Password Token (Don't Change It)!!</label>
+              </h6>
+              <input
+                type='password'
+                required
+                name='passwordToken'
+                value={newPassword.passwordToken}
                 onChange={newPasswordChange}
                 className='w-full px-3 py-2 text-gray-300 rounded-md outline-none lg:text-lg bg-primary focus:ring-offset-2 ring-2 ring-primary'
               />

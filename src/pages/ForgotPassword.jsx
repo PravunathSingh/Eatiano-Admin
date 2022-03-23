@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ForgotPassword = () => {
   const [forgotPassword, setForgotPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const history = useNavigate();
 
   const forgotPasswordChange = (e) => {
@@ -12,6 +13,7 @@ const ForgotPassword = () => {
 
   const forgotPasswordSubmitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const res = await axios.post(
       'https://achievexsolutions.in/current_work/eatiano/api/auth/forget_password',
       {
@@ -19,6 +21,7 @@ const ForgotPassword = () => {
       }
     );
 
+    setLoading(false);
     const resData = res.data;
     console.log(resData);
     setForgotPassword('');
@@ -47,12 +50,18 @@ const ForgotPassword = () => {
               />
             </div>
 
-            <button
-              type='submit'
-              className='w-full px-8 py-2 my-6 text-lg font-medium text-gray-900 transition-all duration-300 rounded-lg hover:text bg-cta md:text-xl hover:bg-cta-dark hover:scale-110 focus:ring-2 ring-offset-2 ring-cta-dark'
-            >
-              Get OTP
-            </button>
+            {loading ? (
+              <p className='text-lg font-medium text-center text-gray-300 font-rubik md:text-xl'>
+                Sending OTP To Mail...
+              </p>
+            ) : (
+              <button
+                type='submit'
+                className='w-full px-8 py-2 my-6 text-lg font-medium text-gray-900 transition-all duration-300 rounded-lg hover:text bg-cta md:text-xl hover:bg-cta-dark hover:scale-110 focus:ring-2 ring-offset-2 ring-cta-dark'
+              >
+                Get OTP
+              </button>
+            )}
           </form>
         </div>
       </div>

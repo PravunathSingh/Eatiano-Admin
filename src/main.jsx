@@ -5,14 +5,17 @@ import App from './App';
 import AuthProvider from './context/authContext';
 import RestaurantsProvider from './context/restaurantsContext';
 import AgentsProvider from './context/deliveryContext';
+import ExpenseProvider from './context/expensesContext';
 
 ReactDOM.render(
   <AuthProvider>
     <RestaurantsProvider>
       <AgentsProvider>
-        <React.StrictMode>
-          <App />
-        </React.StrictMode>
+        <ExpenseProvider>
+          <React.StrictMode>
+            <App />
+          </React.StrictMode>
+        </ExpenseProvider>
       </AgentsProvider>
     </RestaurantsProvider>
   </AuthProvider>,
